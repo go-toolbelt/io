@@ -1,0 +1,30 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: init hermit
+      run: ./bin/hermit env --raw >> $GITHUB_ENV
+
+    - name: lint
+      run: golangci-lint run --fix ./...
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: init hermit
+      run: ./bin/hermit env --raw >> $GITHUB_ENV
+
+    - name: test
+      run: gotestsum ./... -- -race
