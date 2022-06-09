@@ -1,3 +1,3 @@
-module github.com/MatthewDolan/template-go
+module github.com/go-toolbelt/io
 
 go 1.18
